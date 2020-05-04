@@ -10,7 +10,7 @@ telebot.logger.setLevel(logging.INFO)
 
 bot = telebot.AsyncTeleBot(config['TELEGRAM']['token'])
 
-@bot.message_handler(commands=['help'])
+@bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(row_width=1)
     item_button = types.KeyboardButton('/meme')
