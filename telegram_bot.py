@@ -3,8 +3,12 @@ import telebot
 from meme_generator import generate_meme
 import requests
 from telebot import types
+import logging
 
-bot = telebot.TeleBot(config['MAIN']['token'])
+logger = telebot.logger
+telebot.logger.setLevel(logging.INFO)
+
+bot = telebot.AsyncTeleBot(config['TELEGRAM']['token'])
 
 @bot.message_handler(commands=['help'])
 def send_welcome(message):
