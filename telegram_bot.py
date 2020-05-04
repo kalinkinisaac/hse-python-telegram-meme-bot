@@ -10,13 +10,14 @@ telebot.logger.setLevel(logging.INFO)
 
 bot = telebot.AsyncTeleBot(config['TELEGRAM']['token'])
 
+
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(row_width=1)
     item_button = types.KeyboardButton('/meme')
     markup.add(item_button)
-    bot.send_message(message.chat.id, ".", reply_markup=markup)
-    bot.send_message(message.chat.id, "Type /meme to get a new meme")
+    bot.send_message(message.chat.id, "Type /meme to get a new meme",
+                     reply_markup=markup)
 
 
 @bot.message_handler(commands=['meme'])
