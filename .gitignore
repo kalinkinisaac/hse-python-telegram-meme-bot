@@ -1,0 +1,5 @@
+.idea/*
+.idea/
+config.ini
+/venv
+*.DS_Store
