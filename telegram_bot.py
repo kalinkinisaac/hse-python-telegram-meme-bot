@@ -16,7 +16,8 @@ def send_welcome(message):
     markup = types.ReplyKeyboardMarkup(row_width=1)
     item_button = types.KeyboardButton('/meme')
     markup.add(item_button)
-    bot.send_message(message.chat.id, "Type /meme to get a new meme",
+    bot.send_message(message.chat.id,
+                     "Type /meme to get a new meme, or a keyword for search",
                      reply_markup=markup)
 
 
