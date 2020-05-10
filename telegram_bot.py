@@ -21,13 +21,29 @@ def send_welcome(message):
 
 
 @bot.message_handler(commands=['meme'])
-def echo_all(message):
+def meme(message):
     bot.send_chat_action(message.chat.id, 'upload_photo')
-    meme_title, meme_url = generate_meme()
+    meme_title, meme_url = generate_meme(subreddit='memes')
     meme_image = requests.get(meme_url).content
-    # bot.send_message(message.chat.id, meme_title)
     bot.send_photo(
         message.chat.id,
         meme_image,
         meme_title
     )
+
+
+@bot.message_handler(content_types=['text'])
+def function_name(message):
+    bot.send_chat_action(message.chat.id, 'upload_photo')
+    meme_object = generate_meme(keyword=message.text)
+    if meme_object:
+        meme_title, meme_url = generate_meme(keyword=message.text)
+        meme_image = requests.get(meme_url).content
+        bot.send_photo(
+            message.chat.id,
+            meme_image,
+            meme_title
+        )
+    else:
+        bot.send_message(message.chat.id,
+                         'Failed to find content. Try another request')
