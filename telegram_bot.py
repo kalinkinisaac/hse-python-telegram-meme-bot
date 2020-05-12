@@ -1,7 +1,6 @@
 from config import config
 import telebot
-from meme_generator import generate_meme
-import requests
+from content_generator import generate_content
 from telebot import types
 import logging
 
@@ -24,26 +23,24 @@ def send_welcome(message):
 @bot.message_handler(commands=['meme'])
 def meme(message):
     bot.send_chat_action(message.chat.id, 'upload_photo')
-    meme_title, meme_url = generate_meme(subreddit='memes')
-    meme_image = requests.get(meme_url).content
+    meme_title, meme_url = generate_content(subreddit='memes')
     bot.send_photo(
         message.chat.id,
-        meme_image,
+        meme_url,
         meme_title
     )
 
 
 @bot.message_handler(content_types=['text'])
-def function_name(message):
+def content_by_keyword(message):
     bot.send_chat_action(message.chat.id, 'upload_photo')
-    meme_object = generate_meme(keyword=message.text)
-    if meme_object:
-        meme_title, meme_url = generate_meme(keyword=message.text)
-        meme_image = requests.get(meme_url).content
+    content = generate_content(keyword=message.text)
+    if content:
+        title, url = generate_content(keyword=message.text)
         bot.send_photo(
             message.chat.id,
-            meme_image,
-            meme_title
+            url,
+            title
         )
     else:
         bot.send_message(message.chat.id,

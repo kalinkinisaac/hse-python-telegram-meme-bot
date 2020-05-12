@@ -8,7 +8,7 @@ red = praw.Reddit(client_id=config['REDDIT']['client_id'],
                   user_agent=config['REDDIT']['user_agent'])
 
 
-def generate_meme(subreddit=None, keyword='memes'):
+def generate_content(subreddit=None, keyword='memes'):
     if subreddit:
         submission = red.subreddit(subreddit).random()
     else:
